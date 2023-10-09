@@ -1,0 +1,10 @@
+attacker = "FGSM"
+
+seed = 0
+n_examples = 5000
+iteration = 100
+norm = "Linf"
+epsilon = 0.03137255
+
+dataset = "cifar10"
+model = "Carmon2019Unlabeled"

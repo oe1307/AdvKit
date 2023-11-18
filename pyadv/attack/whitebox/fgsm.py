@@ -46,7 +46,8 @@ class FGSM(Attacker):
 
     def check_hyperparameters(self):
         print(
-            "Hyperparameters: \n"
-            f"norm: {config.norm}\n"
-            f"criterion: {config.criterion}"
+            "Hyperparameters: \n",
+            f"norm: {config.norm}\n",
+            f"epsilon: {config.epsilon}\n",
+            f"criterion: {config.criterion}",
         )

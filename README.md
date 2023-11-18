@@ -40,7 +40,6 @@ setting = {
     "norm": "Linf",
     "epsilon": 0.015625,
     "criterion": "cw",
-    "initial_point": "original",
     "dataset": "cifar10",
     "n_examples": 100,
     "model": "Carmon2019Unlabeled",

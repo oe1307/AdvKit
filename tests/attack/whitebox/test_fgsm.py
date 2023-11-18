@@ -9,15 +9,15 @@ def test_fgsm():
         "norm": "Linf",
         "epsilon": 0.015625,
         "criterion": "cw",
-        "initial_point": "original",
         "dataset": "cifar10",
         "n_examples": 100,
         "model": "Carmon2019Unlabeled",
         "batch_size": 100,
     }
+    config_parser().clear()
     config = config_parser(setting)
     if torch.backends.cudnn.is_available():
-        config.device = 0
+        config.device = "cuda"
     elif torch.backends.mps.is_available():
         config.device = "mps"
     else:
@@ -26,5 +26,5 @@ def test_fgsm():
     attacker = get_attacker()
     model, transform = get_model()
     data, label = get_dataset(transform)
+
     attacker.attack(model, data, label)
-    config.clear()

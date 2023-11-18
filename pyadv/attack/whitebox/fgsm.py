@@ -13,8 +13,8 @@ config = config_parser()
 class FGSM(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
-        self.initial_point = get_initial_point()
-        print("Hyperparameters: \n")
+        self.initial_point = get_initial_point("original")
+        self.check_hyperparameters()
 
     def _attack(self, data: Tensor, label: Tensor):
         adex = list()
@@ -43,3 +43,10 @@ class FGSM(Attacker):
 
         adex = torch.cat(adex, dim=0)
         return adex
+
+    def check_hyperparameters(self):
+        print(
+            "Hyperparameters: \n"
+            f"norm: {config.norm}\n"
+            f"criterion: {config.criterion}"
+        )

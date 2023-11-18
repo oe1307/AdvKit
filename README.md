@@ -38,6 +38,7 @@ config = config_parser.read("fgsm.yaml") # support for yaml, json, toml
 setting = {
     "attacker": "FGSM",
     "norm": "Linf",
+    "epsilon": 0.015625,
     "criterion": "cw",
     "initial_point": "original",
     "dataset": "cifar10",

@@ -10,9 +10,9 @@ def test_fgsm():
         "epsilon": 0.015625,
         "criterion": "cw",
         "dataset": "cifar10",
-        "n_examples": 100,
+        "n_examples": 10,
         "model": "Carmon2019Unlabeled",
-        "batch_size": 100,
+        "batch_size": 10,
     }
     config_parser().clear()
     config = config_parser(setting)

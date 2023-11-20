@@ -31,7 +31,7 @@ git clone -b main git+https://github.com/oe1307/AdvKit.git && cd AdvKit && make 
 #### Run with Python imprementation
 
 ```python
-from pyadv import config_parser, get_attacker, get_dataset, get_model
+from pyadv import config_parser, get_attacker, get_dataset, get_model, logger
 
 config = config_parser.read("fgsm.yaml") # support for yaml, json, toml
 # or
@@ -48,7 +48,7 @@ setting = {
 }
 config = config_parser(setting)
 
-
+logger.setLevel("INFO")
 attacker = get_attacker()
 model, transform = get_model()
 data, label = get_dataset(transform)
@@ -64,8 +64,8 @@ attacker.attack(model, data, label)
 
 auto config = advlib::config_parser.read("fgsm.yaml");
 auto attacker = advlib::get_attacker();
-auto model, auto transform = advlib::get_model();
-auto data, auto label = advlib::get_dataset(transform);
+auto model = advlib::get_model();
+auto data = advlib::get_dataset(transform);
 
 attacker.attack(model, data, label);
 ```

@@ -10,7 +10,7 @@ from pyadv.utils import config_parser, logger, pbar
 config = config_parser()
 
 
-class Iterative_FGSM(Attacker):
+class IterativeFGSM(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
         self.initial_point = get_initial_point("original")

@@ -6,7 +6,7 @@ from robustbench.data import load_cifar10, load_cifar100, load_imagenet
 from torch import Tensor
 from torchvision.datasets.imagenet import parse_devkit_archive, parse_val_archive
 
-from pyadv.utils import config_parser, logger, savedir
+from pyadv.utils import config_parser, logger
 
 config = config_parser()
 
@@ -26,7 +26,7 @@ def batch_process(data: Tensor, label: Tensor, size: int) -> Iterator:
         yield x, y
 
 
-def get_dataset(transform: Callable, path: str = savedir.path):
+def get_dataset(transform: Callable, path=os.path.expanduser("~/.cache")):
     assert "dataset" in config, "please specify the dataset in the config"
     if config.dataset == "cifar10":
         data, label = load_cifar10(config.n_examples, path, transform)
@@ -40,7 +40,7 @@ def get_dataset(transform: Callable, path: str = savedir.path):
     return data, label
 
 
-def decompress_imagenet(path: str = savedir.path):
+def decompress_imagenet(path=os.path.expanduser("~/.cache")):
     """
     Decompresses the imagenet dataset.
         ILSVRC2012_devkit_t12.tar.gz -> meta.bin

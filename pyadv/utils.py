@@ -1,33 +1,15 @@
 import collections
 import itertools
 import json
-import logging
 import os
 import pprint
 import random
 from collections.abc import Iterable
 from itertools import tee
-from pathlib import Path
+from logging import DEBUG, StreamHandler, getLogger
 from typing import Dict, Union
 
 import yaml  # type: ignore
-
-import pyadv
-
-logger = logging.getLogger("pyadv")
-logger.setLevel(logging.DEBUG)
-
-
-class SaveDir:
-    def __init__(self):
-        self.__path = f"{Path(pyadv.__file__).parents[1]}/.cache"
-
-    @property
-    def path(self):
-        return self.__path
-
-
-savedir = SaveDir()
 
 
 def fix_seed(seed=0, use_numpy=True, use_torch=True):
@@ -46,6 +28,17 @@ def fix_seed(seed=0, use_numpy=True, use_torch=True):
         torch.backends.cudnn.benchmark = False
         torch.backends.cudnn.deterministic = True
         torch.use_deterministic_algorithms(True)  # raise error if non-deterministic
+
+
+def setup_logger():
+    logger = getLogger("pyadv")
+    handler = StreamHandler()
+    handler.setLevel(DEBUG)
+    logger.setLevel(DEBUG)
+    logger.addHandler(handler)
+
+
+logger = setup_logger()
 
 
 class ConfigParser(dict):
@@ -80,6 +73,11 @@ config_parser = ConfigParser()
 
 
 class ProgressBar:
+    logger = getLogger("pyadv.pbar")
+    handler = StreamHandler()
+    handler.terminator = ""
+    logger.addHandler(handler)
+
     def __init__(
         self, total: int, fmsg: str = "", bmsg: str = "", length=10, start: int = 0
     ):
@@ -97,18 +95,18 @@ class ProgressBar:
         self.iter = start
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        logger.info(f"\r{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
+        self.logger.info(f"\r{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
 
     def step(self, n: int = 1):
         self.iter += n
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        logger.info(f"\r{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        self.logger.info(f"\r{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
     def end(self):
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
 
 def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):

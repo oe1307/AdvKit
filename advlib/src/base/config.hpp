@@ -10,8 +10,6 @@ using dict = std::map<std::string, std::string>;
 
 class Config {
    public:
-    std::string basedir;
-    std::string savedir;
     int device;
     int thread;
     int seed;
@@ -25,7 +23,6 @@ class Config {
     float epsilon;
 
     explicit Config(dict args) {
-        this->basedir = args["basedir"];
         this->device = stoi(args["device"]);
         this->thread = stoi(args["thread"]);
         this->seed = stoi(args["seed"]);

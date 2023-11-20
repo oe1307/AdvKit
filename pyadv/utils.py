@@ -36,6 +36,7 @@ def setup_logger():
     handler.setLevel(DEBUG)
     logger.setLevel(DEBUG)
     logger.addHandler(handler)
+    return logger
 
 
 logger = setup_logger()

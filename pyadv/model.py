@@ -38,7 +38,7 @@ def get_model(path=os.path.expanduser("~/.cache")):
     return model, transform
 
 
-def get_pytorch_model(path: str = os.path.expanduser("~/.cache")):
+def get_pytorch_model(path=os.path.expanduser("~/.cache")):
     torch.hub.set_dir(path)
     raise NotImplementedError
 

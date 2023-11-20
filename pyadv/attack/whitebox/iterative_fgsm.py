@@ -32,12 +32,13 @@ class IterativeFGSM(Attacker):
             best_loss = loss.clone()
 
             # update
-            with torch.enable_grad():
-                x_adv = projection(x_adv.detach() + config.epsilon * grad.sign())
-                prediction = self.model(x_adv).softmax(dim=1)
-                loss = self.criterion(prediction, y)
-            update = loss >= best_loss
-            x_best = x_adv[update].clone()
+            for iter in config.iteration:
+                with torch.enable_grad():
+                    x_adv = projection(x_adv.detach() + config.epsilon * grad.sign())
+                    prediction = self.model(x_adv).softmax(dim=1)
+                    loss = self.criterion(prediction, y)
+                update = loss >= best_loss
+                x_best = x_adv[update].clone()
             adversarial_example.append(x_best.cpu())
 
         adex = torch.cat(adversarial_example, dim=0)

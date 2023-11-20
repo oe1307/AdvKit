@@ -1,12 +1,12 @@
 import collections
 import itertools
 import json
+import logging
 import os
 import pprint
 import random
 from collections.abc import Iterable
 from itertools import tee
-from logging import getLogger
 from pathlib import Path
 from typing import Dict, Union
 
@@ -14,7 +14,8 @@ import yaml  # type: ignore
 
 import pyadv
 
-logger = getLogger("pyadv")
+logger = logging.getLogger("pyadv")
+logger.setLevel(logging.DEBUG)
 
 
 class SaveDir:

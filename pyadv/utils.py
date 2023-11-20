@@ -32,9 +32,9 @@ def fix_seed(seed=0, use_numpy=True, use_torch=True):
 
 def setup_logger():
     logger = getLogger("pyadv")
+    logger.setLevel(DEBUG)
     handler = StreamHandler()
     handler.setLevel(DEBUG)
-    logger.setLevel(DEBUG)
     logger.addHandler(handler)
     return logger
 
@@ -75,13 +75,12 @@ config_parser = ConfigParser()
 
 class ProgressBar:
     logger = getLogger("pyadv.pbar")
+    logger.propagate = False
     handler = StreamHandler()
-    handler.terminator = ""
+    handler.terminator = "\r"
     logger.addHandler(handler)
 
-    def __init__(
-        self, total: int, fmsg: str = "", bmsg: str = "", length=10, start: int = 0
-    ):
+    def __init__(self, total: int, fmsg="", bmsg="", length=10, start=0):
         """
         Args:
             total (int): total number of iterations
@@ -96,18 +95,18 @@ class ProgressBar:
         self.iter = start
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        self.logger.info(f"\r{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
+        self.logger.info(f"{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
 
     def step(self, n: int = 1):
         self.iter += n
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        self.logger.info(f"\r{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
     def end(self):
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}\n")
 
 
 def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):

@@ -1,6 +1,6 @@
 import torch
 
-from pyadv import config_parser, get_attacker, get_dataset, get_model
+from pyadv import config_parser, get_attacker, get_dataset, get_model, logger
 
 
 def test_fgsm():
@@ -23,6 +23,7 @@ def test_fgsm():
     else:
         raise RuntimeError("No GPU found")
 
+    logger.setLevel("DEBUG")
     attacker = get_attacker()
     model, transform = get_model()
     data, label = get_dataset(transform)

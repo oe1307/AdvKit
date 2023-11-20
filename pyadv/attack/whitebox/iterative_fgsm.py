@@ -1,7 +1,7 @@
 import torch
 from torch import Tensor
 
-from pyadv.attack.whitebox.core import get_initial_point, get_projection
+from pyadv.attack.whitebox.core import get_projection
 from pyadv.base_attacker import Attacker
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
@@ -13,7 +13,6 @@ config = config_parser()
 class IterativeFGSM(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
-        self.initial_point = get_initial_point("original")
         self.check_hyperparameters()
 
     def _attack(self, data: Tensor, label: Tensor):
@@ -21,7 +20,7 @@ class IterativeFGSM(Attacker):
         batch = batch_process(data, label, config.batch_size)
         for x, y in pbar(batch, "IterativeFGSM"):
             projection = get_projection(x)
-            x_adv = self.initial_point(x)
+            x_adv = x.clone()
 
             # calculate gradient of initial point
             with torch.enable_grad():

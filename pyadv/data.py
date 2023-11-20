@@ -6,7 +6,7 @@ from robustbench.data import load_cifar10, load_cifar100, load_imagenet
 from torch import Tensor
 from torchvision.datasets.imagenet import parse_devkit_archive, parse_val_archive
 
-from pyadv.utils import config_parser, savedir
+from pyadv.utils import config_parser, logger, savedir
 
 config = config_parser()
 
@@ -49,11 +49,13 @@ def decompress_imagenet(path: str = savedir.path):
     if not os.path.exists(f"{path}/ILSVRC2012_devkit_t12.tar.gz"):
         raise FileExistsError("ILSVRC2012_devkit_t12.tar.gz not found")
     elif not os.path.exists(f"{path}/meta.bin"):
-        print(f"Decompressing imagenet label: {path}/ILSVRC2012_devkit_t12.tar.gz")
+        logger.info(
+            f"Decompressing imagenet label: {path}/ILSVRC2012_devkit_t12.tar.gz"
+        )
         parse_devkit_archive(path)
 
     if not os.path.exists(f"{path}/ILSVRC2012_img_val.tar"):
         raise FileExistsError("ILSVRC2012_img_val.tar not found")
     elif not os.path.exists(f"{path}/val"):
-        print(f"Decompressing imagenet dataset: {path}/ILSVRC2012_img_val.tar")
+        logger.info(f"Decompressing imagenet dataset: {path}/ILSVRC2012_img_val.tar")
         parse_val_archive(path)

@@ -2,7 +2,7 @@ import torch
 from torch import Tensor
 
 from pyadv.attack.whitebox.core import get_initial_point, get_projection
-from pyadv.base import Attacker
+from pyadv.base_attacker import Attacker
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
 from pyadv.utils import config_parser, logger, pbar
@@ -17,7 +17,7 @@ class FastGradientSignMethod(Attacker):
         self.check_hyperparameters()
 
     def _attack(self, data: Tensor, label: Tensor):
-        adex = list()
+        adversarial_example = list()
         batch = batch_process(data, label, config.batch_size)
         for x, y in pbar(batch, "FGSM"):
             projection = get_projection(x)
@@ -39,9 +39,9 @@ class FastGradientSignMethod(Attacker):
                 loss = self.criterion(prediction, y)
             update = loss >= best_loss
             x_best = x_adv[update].clone()
-            adex.append(x_best.cpu())
+            adversarial_example.append(x_best.cpu())
 
-        adex = torch.cat(adex, dim=0)
+        adex = torch.cat(adversarial_example, dim=0)
         return adex
 
     def check_hyperparameters(self):

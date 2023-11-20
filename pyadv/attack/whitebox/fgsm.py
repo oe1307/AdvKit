@@ -5,7 +5,7 @@ from pyadv.attack.whitebox.core import get_initial_point, get_projection
 from pyadv.base import Attacker
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
-from pyadv.utils import config_parser, pbar
+from pyadv.utils import config_parser, logger, pbar
 
 config = config_parser()
 
@@ -45,7 +45,7 @@ class FGSM(Attacker):
         return adex
 
     def check_hyperparameters(self):
-        print(
+        logger.debug(
             "Hyperparameters: \n",
             f"norm: {config.norm}\n",
             f"epsilon: {config.epsilon}\n",

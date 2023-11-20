@@ -6,12 +6,15 @@ import pprint
 import random
 from collections.abc import Iterable
 from itertools import tee
+from logging import getLogger
 from pathlib import Path
 from typing import Dict, Union
 
 import yaml  # type: ignore
 
 import pyadv
+
+logger = getLogger("pyadv")
 
 
 class SaveDir:
@@ -93,18 +96,18 @@ class ProgressBar:
         self.iter = start
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{start}/{self.total} {self.bmsg}", end="\r")
+        logger.info(f"\r{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
 
     def step(self, n: int = 1):
         self.iter += n
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}", end="\r")
+        logger.info(f"\r{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
     def end(self):
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
 
 def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):

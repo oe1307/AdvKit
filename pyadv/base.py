@@ -3,7 +3,7 @@ from torch import Tensor
 from torch.nn import Module
 
 from pyadv.data import batch_process
-from pyadv.utils import config_parser, pbar
+from pyadv.utils import config_parser, logger, pbar
 
 config = config_parser()
 
@@ -23,7 +23,7 @@ class Attacker:
         adex = self.check_adex(adex, target_data)
         is_robust_image = self.classify(adex, target_label, "adversarial")
         attack_success_rate = (1 - is_robust_image.sum() / len(data)) * 100
-        print(f"Attack Success Rate: {attack_success_rate:.2f}%")
+        logger.info(f"Attack Success Rate: {attack_success_rate:.2f}%")
         adversarial_data = data.clone()
         adversarial_data[success_classify] = adex
         return adversarial_data

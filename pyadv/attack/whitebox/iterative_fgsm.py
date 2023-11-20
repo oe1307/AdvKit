@@ -5,7 +5,7 @@ from pyadv.attack.whitebox.core import get_initial_point, get_projection
 from pyadv.base import Attacker
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
-from pyadv.utils import config_parser, pbar
+from pyadv.utils import config_parser, logger, pbar
 
 config = config_parser()
 
@@ -13,8 +13,8 @@ config = config_parser()
 class Iterative_FGSM(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
-        self.initial_point = get_initial_point()
-        print("Hyperparameters: \n")
+        self.initial_point = get_initial_point("original")
+        self.check_hyperparameters()
 
     def _attack(self, data: Tensor, label: Tensor):
         adex = list()
@@ -43,3 +43,11 @@ class Iterative_FGSM(Attacker):
 
         adex = torch.cat(adex, dim=0)
         return adex
+
+    def check_hyperparameters(self):
+        logger.debug(
+            "Hyperparameters: \n",
+            f"norm: {config.norm}\n",
+            f"epsilon: {config.epsilon}\n",
+            f"criterion: {config.criterion}",
+        )

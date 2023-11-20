@@ -19,7 +19,7 @@ class IterativeFGSM(Attacker):
     def _attack(self, data: Tensor, label: Tensor):
         adversarial_example = list()
         batch = batch_process(data, label, config.batch_size)
-        for x, y in pbar(batch, "FGSM"):
+        for x, y in pbar(batch, "IterativeFGSM"):
             projection = get_projection(x)
             x_adv = self.initial_point(x)
 

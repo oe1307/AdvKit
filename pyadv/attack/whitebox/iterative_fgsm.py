@@ -5,7 +5,7 @@ from pyadv.attack.whitebox.core import get_projection
 from pyadv.base_attacker import Attacker
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
-from pyadv.utils import config_parser, logger, pbar
+from pyadv.utils import config_parser, logger, prange
 
 config = config_parser()
 
@@ -18,7 +18,7 @@ class IterativeFGSM(Attacker):
     def _attack(self, data: Tensor, label: Tensor):
         adversarial_example = list()
         batch = batch_process(data, label, config.batch_size)
-        for x, y in pbar(batch, "IterativeFGSM"):
+        for b, (x, y) in enumerate(batch):
             projection = get_projection(x)
             x_adv = x.clone()
 
@@ -32,7 +32,7 @@ class IterativeFGSM(Attacker):
             best_loss = loss.clone()
 
             # update
-            for iter in config.iteration:
+            for iter in prange(config.iteration, f"batch:{b}"):
                 with torch.enable_grad():
                     x_adv = projection(x_adv.detach() + config.epsilon * grad.sign())
                     prediction = self.model(x_adv).softmax(dim=1)

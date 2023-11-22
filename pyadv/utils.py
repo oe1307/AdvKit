@@ -118,16 +118,16 @@ def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):
     iterator, counter = tee(iterator)
     total = count(counter)
     bar = ProgressBar(total, fmsg, bmsg)
-    for i, item in enumerate(iterator):
+    for item in iterator:
         yield item
         bar.step()
     bar.end()
 
 
-def prange(*args, **kwargs):
-    total = len(range(*args, **kwargs))
-    bar = ProgressBar(total, *args, **kwargs)
-    for i in range(*args, **kwargs):
+def prange(total: int, fmsg: str = "", bmsg: str = ""):
+    total = len(range(total))
+    bar = ProgressBar(total, fmsg, bmsg)
+    for i in range(total):
         yield i
         bar.step()
     bar.end()

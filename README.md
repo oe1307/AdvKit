@@ -23,7 +23,7 @@ pip3 install git+https://github.com/oe1307/AdvKit.git
 #### C++
 
 ```
-git clone git+https://github.com/oe1307/AdvKit.git && cd AdvKit && make install
+git clone https://github.com/oe1307/AdvKit.git && cd AdvKit && make install
 ```
 
 ## Usage

@@ -17,13 +17,13 @@
 #### Python
 
 ```
-pip3 install git+https://github.com/oe1307/AdvKit.git@main
+pip3 install git+https://github.com/oe1307/AdvKit.git
 ```
 
 #### C++
 
 ```
-git clone -b main git+https://github.com/oe1307/AdvKit.git && cd AdvKit && make install
+git clone git+https://github.com/oe1307/AdvKit.git && cd AdvKit && make install
 ```
 
 ## Usage

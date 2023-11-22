@@ -6,7 +6,7 @@ from robustbench.data import load_cifar10, load_cifar100, load_imagenet
 from torch import Tensor
 from torchvision.datasets.imagenet import parse_devkit_archive, parse_val_archive
 
-from pyadv.utils import config_parser, savedir
+from pyadv.utils import config_parser, logger
 
 config = config_parser()
 
@@ -26,7 +26,7 @@ def batch_process(data: Tensor, label: Tensor, size: int) -> Iterator:
         yield x, y
 
 
-def get_dataset(transform: Callable, path: str = savedir.path):
+def get_dataset(transform: Callable, path=os.path.expanduser("~/.cache")):
     assert "dataset" in config, "please specify the dataset in the config"
     if config.dataset == "cifar10":
         data, label = load_cifar10(config.n_examples, path, transform)
@@ -40,7 +40,7 @@ def get_dataset(transform: Callable, path: str = savedir.path):
     return data, label
 
 
-def decompress_imagenet(path: str = savedir.path):
+def decompress_imagenet(path=os.path.expanduser("~/.cache")):
     """
     Decompresses the imagenet dataset.
         ILSVRC2012_devkit_t12.tar.gz -> meta.bin
@@ -49,11 +49,13 @@ def decompress_imagenet(path: str = savedir.path):
     if not os.path.exists(f"{path}/ILSVRC2012_devkit_t12.tar.gz"):
         raise FileExistsError("ILSVRC2012_devkit_t12.tar.gz not found")
     elif not os.path.exists(f"{path}/meta.bin"):
-        print(f"Decompressing imagenet label: {path}/ILSVRC2012_devkit_t12.tar.gz")
+        logger.info(
+            f"Decompressing imagenet label: {path}/ILSVRC2012_devkit_t12.tar.gz"
+        )
         parse_devkit_archive(path)
 
     if not os.path.exists(f"{path}/ILSVRC2012_img_val.tar"):
         raise FileExistsError("ILSVRC2012_img_val.tar not found")
     elif not os.path.exists(f"{path}/val"):
-        print(f"Decompressing imagenet dataset: {path}/ILSVRC2012_img_val.tar")
+        logger.info(f"Decompressing imagenet dataset: {path}/ILSVRC2012_img_val.tar")
         parse_val_archive(path)

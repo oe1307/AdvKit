@@ -28,7 +28,7 @@ class CWloss(Module):
         loss = max_{c != y}{f_c(x)} - f_y(x)
         """
         prediction_sorted, idx_sorted = prediction.sort(dim=1, descending=True)
-        class_prediction = prediction[torch.arange(prediction.shape[0]), y]
+        class_prediction = prediction[torch.arange(len(prediction)), y]
         target_prediction = torch.where(
             idx_sorted[:, 0] == y, prediction_sorted[:, 1], prediction_sorted[:, 0]
         )
@@ -43,7 +43,7 @@ class DLRloss(Module):
                     (max_{1st}{f_c(x)} - max_{3rd}{f_c(x)})
         """
         prediction_sorted, idx_sorted = prediction.sort(dim=1, descending=True)
-        class_prediction = prediction[torch.arange(prediction.shape[0]), y]
+        class_prediction = prediction[torch.arange(len(prediction)), y]
         target_prediction = torch.where(
             idx_sorted[:, 0] == y, prediction_sorted[:, 1], prediction_sorted[:, 0]
         )

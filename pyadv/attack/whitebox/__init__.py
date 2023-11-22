@@ -1,5 +1,7 @@
-from pyadv.attack.whitebox.fgsm import FGSM
+from pyadv.attack.whitebox.fgsm import FastGradientSignMethod
+from pyadv.attack.whitebox.iterative_fgsm import IterativeFGSM
 
 whitebox_attacker = {
-    "FGSM": FGSM,
+    "FGSM": FastGradientSignMethod,
+    "IterativeFGSM": IterativeFGSM,
 }

@@ -9,7 +9,7 @@ def test_from_dict():
 
 
 def test_read_toml():
-    config = config_parser.read("tests/config.toml")
+    config = config_parser.read("tests/data/config.toml")
     print(config)
     assert config["test1"] == "ok"
     assert config["test2"] == "ok"
@@ -17,7 +17,7 @@ def test_read_toml():
 
 
 def test_read_yaml():
-    config = config_parser.read("tests/config.yaml")
+    config = config_parser.read("tests/data/config.yaml")
     print(config)
     assert config["test1"] == "ok"
     assert config["test2"] == "ok"

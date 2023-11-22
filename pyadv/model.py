@@ -1,3 +1,4 @@
+import os
 import warnings
 
 import torch
@@ -10,7 +11,7 @@ from robustbench.data import (
 )
 from torchvision.models import list_models
 
-from pyadv.utils import config_parser, savedir
+from pyadv.utils import config_parser
 
 config = config_parser()
 
@@ -24,7 +25,7 @@ def get_model_dict() -> dict:
     return model_dict
 
 
-def get_model(path: str = savedir.path):
+def get_model(path=os.path.expanduser("~/.cache")):
     models = get_model_dict()
     if config.model in models["robustbench"]:
         model, transform = get_robustbench_model(path)
@@ -37,12 +38,12 @@ def get_model(path: str = savedir.path):
     return model, transform
 
 
-def get_pytorch_model(path: str = savedir.path):
+def get_pytorch_model(path=os.path.expanduser("~/.cache")):
     torch.hub.set_dir(path)
     raise NotImplementedError
 
 
-def get_robustbench_model(path: str = savedir.path):
+def get_robustbench_model(path=os.path.expanduser("~/.cache")):
     torch.hub.set_dir(path)
     dataset = BenchmarkDataset(config.dataset)
     norm = ThreatModel(config.norm)

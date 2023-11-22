@@ -6,24 +6,10 @@ import pprint
 import random
 from collections.abc import Iterable
 from itertools import tee
-from pathlib import Path
+from logging import DEBUG, StreamHandler, getLogger
 from typing import Dict, Union
 
 import yaml  # type: ignore
-
-import pyadv
-
-
-class SaveDir:
-    def __init__(self):
-        self.__path = f"{Path(pyadv.__file__).parents[1]}/.cache"
-
-    @property
-    def path(self):
-        return self.__path
-
-
-savedir = SaveDir()
 
 
 def fix_seed(seed=0, use_numpy=True, use_torch=True):
@@ -42,6 +28,18 @@ def fix_seed(seed=0, use_numpy=True, use_torch=True):
         torch.backends.cudnn.benchmark = False
         torch.backends.cudnn.deterministic = True
         torch.use_deterministic_algorithms(True)  # raise error if non-deterministic
+
+
+def setup_logger():
+    logger = getLogger("pyadv")
+    logger.setLevel(DEBUG)
+    handler = StreamHandler()
+    handler.setLevel(DEBUG)
+    logger.addHandler(handler)
+    return logger
+
+
+logger = setup_logger()
 
 
 class ConfigParser(dict):
@@ -76,9 +74,13 @@ config_parser = ConfigParser()
 
 
 class ProgressBar:
-    def __init__(
-        self, total: int, fmsg: str = "", bmsg: str = "", length=10, start: int = 0
-    ):
+    logger = getLogger("pyadv.pbar")
+    logger.propagate = False
+    handler = StreamHandler()
+    handler.terminator = "\r"
+    logger.addHandler(handler)
+
+    def __init__(self, total: int, fmsg="", bmsg="", length=10, start=0):
         """
         Args:
             total (int): total number of iterations
@@ -93,18 +95,18 @@ class ProgressBar:
         self.iter = start
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{start}/{self.total} {self.bmsg}", end="\r")
+        self.logger.info(f"{self.fmsg}{bar}{start}/{self.total} {self.bmsg}")
 
     def step(self, n: int = 1):
         self.iter += n
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}", end="\r")
+        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
 
     def end(self):
         percent = int((self.iter) / self.total * self.length)
         bar = " [" + ("#" * percent).ljust(self.length, " ") + "] "
-        print(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}")
+        self.logger.info(f"{self.fmsg}{bar}{self.iter}/{self.total} {self.bmsg}\n")
 
 
 def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):
@@ -116,16 +118,16 @@ def pbar(iterator: Iterable, fmsg: str = "", bmsg: str = ""):
     iterator, counter = tee(iterator)
     total = count(counter)
     bar = ProgressBar(total, fmsg, bmsg)
-    for i, item in enumerate(iterator):
+    for item in iterator:
         yield item
         bar.step()
     bar.end()
 
 
-def prange(*args, **kwargs):
-    total = len(range(*args, **kwargs))
-    bar = ProgressBar(total, *args, **kwargs)
-    for i in range(*args, **kwargs):
+def prange(total: int, fmsg: str = "", bmsg: str = ""):
+    total = len(range(total))
+    bar = ProgressBar(total, fmsg, bmsg)
+    for i in range(total):
         yield i
         bar.step()
     bar.end()

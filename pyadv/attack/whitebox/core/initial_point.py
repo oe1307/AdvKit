@@ -1,18 +1,11 @@
-from torch import Tensor
-
 from pyadv.utils import config_parser
 
 config = config_parser()
 
 
-def get_initial_point():
-    if config.initial_point == "original":
-        initial_point = OriginalPoint()
+def get_initial_point(method: str):
+    if method == "":
+        initial_point = None
     else:
-        raise NotImplementedError(config.initial_point)
+        raise NotImplementedError(method)
     return initial_point
-
-
-class OriginalPoint:
-    def __call__(self, x: Tensor):
-        return x

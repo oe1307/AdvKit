@@ -11,7 +11,10 @@ namespace advlib {
 
 using dict = std::map<std::string, std::string>;
 
-void fix_seed(int seed) { throw std::runtime_error("Not implemented yet"); }
+inline void fix_seed(int seed) {
+    std::cout << seed << std::endl;
+    throw std::runtime_error("Not implemented yet");
+}
 
 class Logger {
    public:
@@ -85,23 +88,25 @@ inline dict load_yaml(std::string path) {
 inline dict load_json(std::string path) {
     dict params;
     throw std::runtime_error("Not implemented yet");
+    std::cout << path << std::endl;
     return params;
 }
 
 inline dict load_toml(std::string path) {
     dict params;
     throw std::runtime_error("Not implemented yet");
+    std::cout << path << std::endl;
     return params;
 }
 
-class Config {
-   public:
-    Config(dict setting);
+class BaseConfig {
+public:
+    explicit BaseConfig(dict setting);
 };
 
 class ConfigParser {
    public:
-    Config read(std::string path) {
+    BaseConfig read(std::string path) {
         dict setting;
         std::string extention;
 
@@ -115,11 +120,11 @@ class ConfigParser {
         } else {
             throw std::runtime_error("Unsupported file format: " + extention);
         }
-        return Config(setting);
+        return BaseConfig(setting);
     }
 
    private:
-    Config config;
+    BaseConfig config;
 };
 
 ConfigParser config_parser();

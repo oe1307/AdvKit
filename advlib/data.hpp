@@ -1,4 +1,3 @@
-
 #ifndef ADVLIB_DATA_HPP_
 #define ADVLIB_DATA_HPP_
 
@@ -6,7 +5,7 @@
 
 namespace advlib {
 
-torch::data::Dataset get_dataset();
+torch::Tensor get_dataset();
 
 }  // namespace advlib
 

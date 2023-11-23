@@ -1,9 +1,11 @@
-attacker: FGSM
-norm: Linf
-epsilon: 0.015625
-dataset: cifar10
-n_examples: 10
-model: Carmon2019Unlabeled
-batch_size: 10
-# --- parameter ---
-criterion: cw
+test3_int: 3
+test3_float: 3.1
+test3_string: test3_1
+test3_list: [3.3, 3.3, 3.4]
+test3_dict:
+  test3_2: 3.5
+  test3_3: 3.6
+test3_bool: true
+test3_null:
+test3_empty_list: []
+# test3_conmment

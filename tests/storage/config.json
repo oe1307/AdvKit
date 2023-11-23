@@ -1,10 +1,12 @@
 {
-  "attacker": "FGSM",
-  "norm": "Linf",
-  "epsilon": 0.015625,
-  "dataset": "cifar10",
-  "n_examples": 10,
-  "model": "Carmon2019Unlabeled",
-  "batch_size": 10,
-  "criterion": "cw"
+  "test1_int": 1,
+  "test1_float": 1.1,
+  "test1_string": "test1_1",
+  "test1_list": [1.2, 1.3, 1.4],
+  "test1_dict": { "test1_2": 1.5, "test1_3": 1.6 },
+  "test1_bool": true,
+  "test1_null": null,
+  "test1_empty": "",
+  "test1_empty_list": [],
+  "test1_empty_dict": {}
 }

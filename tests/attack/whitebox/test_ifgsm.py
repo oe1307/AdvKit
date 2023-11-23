@@ -8,11 +8,12 @@ def test_fgsm():
         "attacker": "IterativeFGSM",
         "norm": "Linf",
         "epsilon": 0.015625,
-        "criterion": "cw",
         "dataset": "cifar10",
         "n_examples": 10,
         "model": "Carmon2019Unlabeled",
         "batch_size": 10,
+        # --- parameter ---
+        "criterion": "cw",
         "iteration": 10,
     }
     config_parser().clear()
@@ -26,7 +27,7 @@ def test_fgsm():
 
     logger.setLevel("DEBUG")
     attacker = get_attacker()
-    model, transform = get_model()
-    data, label = get_dataset(transform)
+    model = get_model()
+    data, label = get_dataset()
 
     attacker.attack(model, data, label)

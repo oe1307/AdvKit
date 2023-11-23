@@ -1,1 +1,2 @@
-add_library(attacker fgsm.cpp)
+add_subdirectory(blackbox)
+add_subdirectory(whitebox)

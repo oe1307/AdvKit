@@ -4,9 +4,11 @@
 #include <map>
 #include <string>
 
-using dict = std::map<std::string, std::string>;
+#include "./utils.hpp"
 
-class Config {
+namespace advlib {
+
+class Parameter : public Config {
    public:
     std::string attacker;
     std::string norm;
@@ -17,7 +19,7 @@ class Config {
     int batch_size;
     int device;
 
-    explicit Config(dict setting) {
+    explicit Parameter(dict setting) {
         this->attacker = setting["attacker"];
         this->norm = setting["norm"];
         this->epsilon = stof(setting["epsilon"]);
@@ -27,18 +29,16 @@ class Config {
         this->batch_size = stoi(setting["batch_size"]);
         this->device = stoi(setting["device"]);
     }
-
-    // TODO: 出力演算子
 };
 
 class Attacker {
    public:
-    explicit Attacker(Config config) : config(config) {}
     void attack();
 
    private:
-    Config config;
     virtual void _attack() = 0;
 };
+
+}  // namespace advlib
 
 #endif  // ADVLIB_BASE_ATTACKER_HPP_

@@ -4,11 +4,14 @@
 #include <stdexcept>
 
 #include "../base_attacker.hpp"
+#include "../utils.hpp"
 #include "whitebox/fgsm.hpp"
 
 namespace advlib {
 
-inline Attacker* get_attacker(Config config) {
+inline Attacker* get_attacker() {
+    Parameter config = advlib::config_parser();
+
     if (config.attacker == "Fgsm") {
         return new Fgsm(config);
     } else {

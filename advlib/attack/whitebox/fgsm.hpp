@@ -5,9 +5,9 @@
 
 namespace advlib {
 
-class FgsmParameter : public Config {
+class FgsmParameter : public Parameter{
    public:
-    explicit FgsmParameter(dict config) : Config(config) {}
+    explicit FgsmParameter(dict setting) : Parameter(setting) {}
 };
 
 class Fgsm : public Attacker {

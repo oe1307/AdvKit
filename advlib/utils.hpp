@@ -7,17 +7,54 @@
 #include <map>
 #include <string>
 
-#include "./base_attacker.hpp"
-
 namespace advlib {
 
 using dict = std::map<std::string, std::string>;
 
-void fix_seed(int seed);
+void fix_seed(int seed) { throw std::runtime_error("Not implemented yet"); }
 
 class Logger {
    public:
-    void setLevel(std::string);
+    enum Level {
+        CRITICAL = 50,
+        FATAL = CRITICAL,
+        ERROR = 40,
+        WARNING = 30,
+        WARN = WARNING,
+        INFO = 20,
+        DEBUG = 10,
+        NOTSET = 0
+    };
+    void setLevel(Level level) { this->level = level; }
+    void setLevel(int level) { this->level = level; }
+    void critical(std::string msg) {
+        if (this->level >= CRITICAL) {
+            std::cout << "[CRITICAL] " << msg << std::endl;
+        }
+    }
+    void error(std::string msg) {
+        if (this->level >= ERROR) {
+            std::cout << "[ERROR] " << msg << std::endl;
+        }
+    }
+    void warning(std::string msg) {
+        if (this->level >= WARNING) {
+            std::cout << "[WARNING] " << msg << std::endl;
+        }
+    }
+    void info(std::string msg) {
+        if (this->level >= INFO) {
+            std::cout << "[INFO] " << msg << std::endl;
+        }
+    }
+    void debug(std::string msg) {
+        if (this->level >= DEBUG) {
+            std::cout << "[DEBUG] " << msg << std::endl;
+        }
+    }
+
+   private:
+    int level;
 };
 
 Logger logger();
@@ -57,9 +94,13 @@ inline dict load_toml(std::string path) {
     return params;
 }
 
+class Config {
+   public:
+    Config(dict setting);
+};
+
 class ConfigParser {
    public:
-    explicit ConfigParser(dict setting);
     Config read(std::string path) {
         dict setting;
         std::string extention;
@@ -76,6 +117,9 @@ class ConfigParser {
         }
         return Config(setting);
     }
+
+   private:
+    Config config;
 };
 
 ConfigParser config_parser();

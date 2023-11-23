@@ -1,3 +1,7 @@
+# plugins
+include(cmake/libtorch.cmake)
+set(PLUGINS ${TORCH_LIBRARIES})
+
 add_subdirectory(attacker)
 add_subdirectory(base)
 add_subdirectory(selector)

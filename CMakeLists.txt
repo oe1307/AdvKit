@@ -11,6 +11,6 @@ include(advlib/cmake/libtorch.cmake)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
   add_compile_options(-O2 -Wall -Wextra)
-  add_subdirectory(tests/advlib)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin)
+  add_subdirectory(tests/advlib)
 endif()

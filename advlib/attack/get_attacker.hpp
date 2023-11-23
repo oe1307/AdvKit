@@ -1,5 +1,5 @@
-#ifndef SRC_SELECTOR_ATTACKER_HPP_
-#define SRC_SELECTOR_ATTACKER_HPP_
+#ifndef ADVLIB_ATTACK_GET_ATTACKER_HPP_
+#define ADVLIB_ATTACK_GET_ATTACKER_HPP_
 
 #include <stdexcept>
 
@@ -13,4 +13,4 @@ Attacker* get_attacker(Config config) {
         throw std::invalid_argument("Invalid attacker: " + config.attacker);
     }
 }
-#endif  // SRC_SELECTOR_ATTACKER_HPP_
+#endif  // ADVLIB_ATTACK_GET_ATTACKER_HPP_

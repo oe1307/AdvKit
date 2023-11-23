@@ -12,20 +12,6 @@
 #include "./utils/argparse.hpp"
 #include "./utils/functions.hpp"
 
-dict argparser(int argc, char *argv[]) {
-    argparse::ArgumentParser parser;
-    dict args;
-    parser.add_argument("-p", "--params").required().help("path to yaml file");
-    parser.add_argument("-g", "--device").required().help("gpu id");
-    parser.add_argument("-t", "--thread")
-        .default_value("1")
-        .help("number of threads");
-    parser.add_argument("-u", "--update")
-        .nargs('*')
-        .help("params to update, e.g.)  -u iter=100 n_examples=1000");
-    args = parser.parse_args(argc, argv);
-    return args;
-}
 
 void attack(Config config) {
     c10::cuda::set_device(config.device);

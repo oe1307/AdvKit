@@ -13,6 +13,15 @@ namespace advlib {
 
 using dict = std::map<std::string, std::string>;
 
+void fix_seed(int seed);
+
+class Logger {
+   public:
+    void setLevel(std::string);
+};
+
+Logger logger();
+
 inline dict load_yaml(std::string path) {
     dict params;
     std::string line, key, val;
@@ -70,6 +79,29 @@ class ConfigParser {
 };
 
 ConfigParser config_parser();
+
+class ProgressBar {
+   public:
+    explicit ProgressBar(int total, std::string fmsg = "",
+                         std::string bmsg = "", int length = 10,
+                         int start = 10) {
+        this->total = total;
+        this->fmsg = fmsg;
+        this->bmsg = bmsg;
+        this->length = length;
+        this->iter = start;
+        this->percent = this->iter / this->total * this->length;
+        this->bar = "[" + std::string(this->percent, '#') +
+                    std::string(this->length - this->percent, ' ') + "] ";
+    }
+    void step(int n = 1);
+    void end();
+
+   private:
+    Logger logger;
+    int total, length, iter, percent;
+    std::string fmsg, bmsg, bar;
+};
 
 }  // namespace advlib
 

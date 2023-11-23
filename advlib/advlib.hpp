@@ -1,4 +1,8 @@
+#ifndef ADVLIB_ADVLIB_HPP_
+#define ADVLIB_ADVLIB_HPP_
+
 #include "./attack/get_attacker.hpp"
-#include "./attack/get_config.hpp"
 #include "./base_attacker.hpp"
 #include "./utils.hpp"
+
+#endif  // ADVLIB_ADVLIB_HPP_

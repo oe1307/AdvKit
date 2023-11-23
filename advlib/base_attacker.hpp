@@ -22,8 +22,8 @@ class Config {
         this->norm = setting["norm"];
         this->epsilon = stof(setting["epsilon"]);
         this->dataset = setting["dataset"];
-        this->model = setting["model"];
         this->n_examples = stoi(setting["n_examples"]);
+        this->model = setting["model"];
         this->batch_size = stoi(setting["batch_size"]);
         this->device = stoi(setting["device"]);
     }

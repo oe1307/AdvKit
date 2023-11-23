@@ -3,6 +3,8 @@
 
 #include "../../base_attacker.hpp"
 
+namespace advlib {
+
 class FgsmParameter : public Config {
    public:
     explicit FgsmParameter(dict config) : Config(config) {}
@@ -13,5 +15,7 @@ class Fgsm : public Attacker {
     explicit Fgsm(Config config) : Attacker(config) {}
     void _attack() override;
 };
+
+}  // namespace advlib
 
 #endif  // ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_

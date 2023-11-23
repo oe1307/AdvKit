@@ -1,0 +1,9 @@
+attacker: FGSM
+norm: Linf
+epsilon: 0.015625
+dataset: cifar10
+n_examples: 10
+model: Carmon2019Unlabeled
+batch_size: 10
+# --- parameter ---
+criterion: cw

@@ -1,5 +1,5 @@
-#ifndef SRC_UTILS_HPP_
-#define SRC_UTILS_HPP_
+#ifndef ADVLIB_UTILS_HPP_
+#define ADVLIB_UTILS_HPP_
 
 #include <filesystem>
 #include <fstream>
@@ -38,4 +38,4 @@ dict load(std::string path) {
 
 }  // namespace yaml
 
-#endif  // SRC_UTILS_FUNCTIONS_HPP_
+#endif  // ADVLIB_UTILS_HPP_

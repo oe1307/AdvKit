@@ -1,8 +1,10 @@
-#include "./attacker.hpp"
+#ifndef SRC_SELECTOR_ATTACKER_HPP_
+#define SRC_SELECTOR_ATTACKER_HPP_
 
 #include <stdexcept>
 
-#include "../attacker/fgsm.hpp"
+#include "../base_attacker.hpp"
+#include "attack/whitebox/fgsm.hpp"
 
 Attacker* get_attacker(Config config) {
     if (config.attacker == "FGSM") {
@@ -11,3 +13,4 @@ Attacker* get_attacker(Config config) {
         throw std::invalid_argument("Invalid attacker: " + config.attacker);
     }
 }
+#endif  // SRC_SELECTOR_ATTACKER_HPP_

@@ -11,7 +11,7 @@ using dict = std::map<std::string, std::string>;
 
 namespace yaml {
 
-dict load(std::string path) {
+inline dict load(std::string path) {
     dict params;
     std::string line;
     std::size_t pos;

@@ -46,8 +46,7 @@ setting = {
     "model": "Carmon2019Unlabeled",
     "batch_size": 100,
     "device": 0,
-
-    # parameter
+    # --- parameter ---
     "criterion": "cw",
 }
 config = config_parser(setting)
@@ -76,8 +75,7 @@ auto setting = {
     {"model", "Carmon2019Unlabeled"},
     {"batch_size", "100"},
     {"device", "0"},
-
-    // parameter
+    // --- parameter ---
     {"criterion", "cw"}
 }
 auto config = config_parser(setting)

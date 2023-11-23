@@ -62,7 +62,7 @@ attacker.attack(model, data, label)
 #### Run with C++ imprementation
 
 ```c++
-#include advlib
+#include <advlib/advlib.hpp>
 
 auto config = advlib::config_parser.read("fgsm.yaml");  // support for yaml, json, toml
 // or
@@ -80,13 +80,10 @@ auto setting = {
 }
 auto config = config_parser(setting)
 
+advlib::logger.setLevel("INFO")
 auto attacker = advlib::get_attacker();
 auto model = advlib::get_model();
 auto [data, label] = advlib::get_dataset();
 
 attacker.attack(model, data, label);
 ```
-
-## Note
-
-attackers information is avilable in []()

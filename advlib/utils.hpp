@@ -9,15 +9,14 @@
 
 #include "./base_attacker.hpp"
 
+namespace advlib {
+
 using dict = std::map<std::string, std::string>;
 
-namespace yaml {
-inline dict load(std::string path) {
+inline dict load_yaml(std::string path) {
     dict params;
-    std::string line;
+    std::string line, key, val;
     std::size_t pos;
-    std::string key;
-    std::string val;
 
     std::ifstream stream(path);
     if (stream.fail()) {
@@ -36,10 +35,42 @@ inline dict load(std::string path) {
     }
     return params;
 }
-}  // namespace yaml
 
-namespace advlib {
-inline Config config_parser(dict setting) { return Config(setting); }
+inline dict load_json(std::string path) {
+    dict params;
+    throw std::runtime_error("Not implemented yet");
+    return params;
+}
+
+inline dict load_toml(std::string path) {
+    dict params;
+    throw std::runtime_error("Not implemented yet");
+    return params;
+}
+
+class ConfigParser {
+   public:
+    explicit ConfigParser(dict setting);
+    Config read(std::string path) {
+        dict setting;
+        std::string extention;
+
+        extention = std::filesystem::path(path).extension();
+        if (extention == ".yaml" || extention == ".yml") {
+            setting = load_yaml(path);
+        } else if (extention == ".json") {
+            setting = load_json(path);
+        } else if (extention == ".toml") {
+            setting = load_toml(path);
+        } else {
+            throw std::runtime_error("Unsupported file format: " + extention);
+        }
+        return Config(setting);
+    }
+};
+
+ConfigParser config_parser();
+
 }  // namespace advlib
 
 #endif  // ADVLIB_UTILS_HPP_

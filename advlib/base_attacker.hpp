@@ -17,15 +17,15 @@ class Config {
     int batch_size;
     int device;
 
-    explicit Config(dict args) {
-        this->attacker = args["attacker"];
-        this->norm = args["norm"];
-        this->epsilon = stof(args["epsilon"]);
-        this->dataset = args["dataset"];
-        this->model = args["model"];
-        this->n_examples = stoi(args["n_examples"]);
-        this->batch_size = stoi(args["batch_size"]);
-        this->device = stoi(args["device"]);
+    explicit Config(dict setting) {
+        this->attacker = setting["attacker"];
+        this->norm = setting["norm"];
+        this->epsilon = stof(setting["epsilon"]);
+        this->dataset = setting["dataset"];
+        this->model = setting["model"];
+        this->n_examples = stoi(setting["n_examples"]);
+        this->batch_size = stoi(setting["batch_size"]);
+        this->device = stoi(setting["device"]);
     }
 
     // TODO: 出力演算子

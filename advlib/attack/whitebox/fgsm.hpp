@@ -3,6 +3,11 @@
 
 #include "../../base_attacker.hpp"
 
+class FGSM_Config : public Config {
+   public:
+    explicit FGSM_Config(dict config) : Config(config) {}
+};
+
 class FGSM : public Attacker {
    public:
     explicit FGSM(Config config) : Attacker(config) {}

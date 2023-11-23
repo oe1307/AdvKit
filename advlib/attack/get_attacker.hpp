@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 #include "../base_attacker.hpp"
-#include "attack/whitebox/fgsm.hpp"
+#include "whitebox/fgsm.hpp"
 
 Attacker* get_attacker(Config config) {
     if (config.attacker == "FGSM") {

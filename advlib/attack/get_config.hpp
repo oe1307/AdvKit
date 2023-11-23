@@ -1,18 +1,10 @@
 #ifndef SRC_SELECTOR_CONFIG_HPP_
 #define SRC_SELECTOR_CONFIG_HPP_
 
-#include "../base/config.hpp"
-
-Config* get_config(dict args, dict params);
-
-#endif  // SRC_SELECTOR_CONFIG_HPP_
-
-
-#include "./config.hpp"
-
 #include <stdexcept>
 
-#include "../config/fgsm.hpp"
+#include "../base_attacker.hpp"
+#include "whitebox/fgsm.hpp"
 
 Config* get_config(dict args, dict params) {
     dict config = args;
@@ -24,3 +16,5 @@ Config* get_config(dict args, dict params) {
         throw std::invalid_argument("Invalid attacker");
     }
 }
+
+#endif  // SRC_SELECTOR_CONFIG_HPP_

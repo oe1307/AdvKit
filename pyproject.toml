@@ -23,9 +23,6 @@ dev = [
   "pyproject-flake8",
   "mypy",
   "pytest",
-  "matplotlib",
-  "jupyter",
-  "notebook",
 ]
 
 [tool.setuptools.packages.find]

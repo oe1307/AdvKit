@@ -1,5 +1,5 @@
-#ifndef SRC_SELECTOR_CONFIG_HPP_
-#define SRC_SELECTOR_CONFIG_HPP_
+#ifndef ADVLIB_ATTACK_GET_CONFIG_HPP_
+#define ADVLIB_ATTACK_GET_CONFIG_HPP_
 
 #include <stdexcept>
 
@@ -17,4 +17,4 @@ Config* get_config(dict args, dict params) {
     }
 }
 
-#endif  // SRC_SELECTOR_CONFIG_HPP_
+#endif  // ADVLIB_ATTACK_GET_CONFIG_HPP_

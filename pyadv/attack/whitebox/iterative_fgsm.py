@@ -46,8 +46,7 @@ class IterativeFGSM(Attacker):
 
     def check_hyperparameters(self):
         logger.debug(
-            "Hyperparameters: \n"
-            + f" norm: {config.norm}\n"
-            + f" epsilon: {config.epsilon}\n"
+            "Parameters: \n"
             + f" criterion: {config.criterion}\n"
+            + f" iteration: {config.iteration}\n"
         )

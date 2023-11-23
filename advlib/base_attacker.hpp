@@ -1,5 +1,5 @@
-#ifndef SRC_BASE_ATTACKER_HPP_
-#define SRC_BASE_ATTACKER_HPP_
+#ifndef ADVLIB_BASE_ATTACKER_HPP_
+#define ADVLIB_BASE_ATTACKER_HPP_
 
 #include <map>
 #include <string>
@@ -45,4 +45,4 @@ class Attacker {
     virtual void _attack() = 0;
 };
 
-#endif  // SRC_BASE_ATTACKER_HPP_
+#endif  // ADVLIB_BASE_ATTACKER_HPP_

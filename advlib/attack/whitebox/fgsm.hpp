@@ -1,7 +1,7 @@
-#ifndef SRC_ATTACKER_FGSM_HPP_
-#define SRC_ATTACKER_FGSM_HPP_
+#ifndef ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_
+#define ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_
 
-#include "../base/attacker.hpp"
+#include "../../base_attacker.hpp"
 
 class FGSM : public Attacker {
    public:
@@ -10,4 +10,4 @@ class FGSM : public Attacker {
     void _attack() override;
 };
 
-#endif  // SRC_ATTACKER_FGSM_HPP_
+#endif  // ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_

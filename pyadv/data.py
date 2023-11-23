@@ -1,11 +1,19 @@
 import math
 import os
-from typing import Callable, Iterator
+from typing import Iterator
 
-from robustbench.data import load_cifar10, load_cifar100, load_imagenet
+from robustbench.data import (
+    BenchmarkDataset,
+    ThreatModel,
+    get_preprocessing,
+    load_cifar10,
+    load_cifar100,
+    load_imagenet,
+)
 from torch import Tensor
 from torchvision.datasets.imagenet import parse_devkit_archive, parse_val_archive
 
+from pyadv.model import get_model_dict
 from pyadv.utils import config_parser, logger
 
 config = config_parser()
@@ -26,8 +34,25 @@ def batch_process(data: Tensor, label: Tensor, size: int) -> Iterator:
         yield x, y
 
 
-def get_dataset(transform: Callable, path=os.path.expanduser("~/.cache")):
+def get_transform():
+    models = get_model_dict()
+    if config.model in models["pytorch"] and config.dataset == "imagenet":
+        raise NotImplementedError
+    elif config.model in models["robustbench"]:
+        transform = get_preprocessing(
+            BenchmarkDataset(config.dataset),
+            ThreatModel(config.norm),
+            config.model,
+            None,
+        )
+    else:
+        raise ValueError(f"model {config.model} not found")
+    return transform
+
+
+def get_dataset(path=os.path.expanduser("~/.cache")):
     assert "dataset" in config, "please specify the dataset in the config"
+    transform = get_transform()
     if config.dataset == "cifar10":
         data, label = load_cifar10(config.n_examples, path, transform)
     elif config.dataset == "cifar100":

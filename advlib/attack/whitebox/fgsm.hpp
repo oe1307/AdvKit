@@ -3,15 +3,14 @@
 
 #include "../../base_attacker.hpp"
 
-class FGSM_Config : public Config {
+class FgsmParameter : public Config {
    public:
-    explicit FGSM_Config(dict config) : Config(config) {}
+    explicit FgsmParameter(dict config) : Config(config) {}
 };
 
-class FGSM : public Attacker {
+class Fgsm : public Attacker {
    public:
-    explicit FGSM(Config config) : Attacker(config) {}
-
+    explicit Fgsm(Config config) : Attacker(config) {}
     void _attack() override;
 };
 

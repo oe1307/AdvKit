@@ -35,28 +35,29 @@ cmake --build .build
 ```python
 from pyadv import config_parser, get_attacker, get_dataset, get_model, logger
 
-config = config_parser.read("fgsm.yaml") # support for yaml, json, toml
+config = config_parser.read("fgsm.yaml")  # support for yaml, json, toml
 # or
 setting = {
     "attacker": "FGSM",
     "norm": "Linf",
     "epsilon": 0.015625,
-    "criterion": "cw",
     "dataset": "cifar10",
     "n_examples": 100,
     "model": "Carmon2019Unlabeled",
     "batch_size": 100,
     "device": 0,
+
+    # parameter
+    "criterion": "cw",
 }
 config = config_parser(setting)
 
 logger.setLevel("INFO")
 attacker = get_attacker()
-model, transform = get_model()
-data, label = get_dataset(transform)
+model = get_model()
+data, label = get_dataset()
 
 attacker.attack(model, data, label)
-
 ```
 
 #### Run with C++ imprementation
@@ -64,10 +65,26 @@ attacker.attack(model, data, label)
 ```c++
 #include advlib
 
-auto config = advlib::config_parser.read("fgsm.yaml");
+auto config = advlib::config_parser.read("fgsm.yaml");  // support for yaml, json, toml
+// or
+auto setting = {
+    {"attacker", "FGSM"},
+    {"norm", "Linf"},
+    {"epsilon", "0.015625"},
+    {"dataset", "cifar10"},
+    {"n_examples", "100"},
+    {"model", "Carmon2019Unlabeled"},
+    {"batch_size", "100"},
+    {"device", "0"},
+
+    // parameter
+    {"criterion", "cw"}
+}
+auto config = config_parser(setting)
+
 auto attacker = advlib::get_attacker();
 auto model = advlib::get_model();
-auto data = advlib::get_dataset(transform);
+auto [data, label] = advlib::get_dataset();
 
 attacker.attack(model, data, label);
 ```

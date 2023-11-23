@@ -6,12 +6,9 @@
 #include "../base_attacker.hpp"
 #include "whitebox/fgsm.hpp"
 
-Config* get_config(dict args, dict params) {
-    dict config = args;
-    config.merge(params);
-
-    if (config["attacker"] == "FGSM") {
-        return new FGSM_Config(config);
+inline Config* get_config(dict config) {
+    if (config["attacker"] == "Fgsm") {
+        return new FgsmParameter(config);
     } else {
         throw std::invalid_argument("Invalid attacker");
     }

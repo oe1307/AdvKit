@@ -6,9 +6,9 @@
 #include "../base_attacker.hpp"
 #include "whitebox/fgsm.hpp"
 
-Attacker* get_attacker(Config config) {
-    if (config.attacker == "FGSM") {
-        return new FGSM(config);
+inline Attacker* get_attacker(Config config) {
+    if (config.attacker == "Fgsm") {
+        return new Fgsm(config);
     } else {
         throw std::invalid_argument("Invalid attacker: " + config.attacker);
     }

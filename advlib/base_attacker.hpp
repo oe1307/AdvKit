@@ -33,6 +33,7 @@ class Config {
 
 class Attacker {
    public:
+    explicit Attacker(Config config) : config(config) {}
     void attack();
 
    private:

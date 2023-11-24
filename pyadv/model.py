@@ -6,12 +6,10 @@ from robustbench import load_model
 from robustbench.data import BenchmarkDataset, ThreatModel, all_models
 from torchvision.models import list_models
 
-from pyadv.utils import config_parser
-
-config = config_parser()
+from pyadv.utils import Config
 
 
-def get_model_dict() -> dict:
+def get_model_dict(config: Config) -> dict:
     model_dict = {"pytorch": list_models(), "robustbench": None}
     if config.dataset in (d.value for d in BenchmarkDataset):
         models = all_models[BenchmarkDataset(config.dataset)][ThreatModel(config.norm)]

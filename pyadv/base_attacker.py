@@ -29,7 +29,7 @@ class Attacker:
         return adversarial_data
 
     def _attack(self, data: Tensor, label: Tensor):
-        raise NotImplementedError()
+        raise NotImplementedError
 
     def classify(self, data: Tensor, label: Tensor, dset: str):
         # FIXME: targeted, untargeted

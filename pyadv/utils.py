@@ -8,7 +8,7 @@ import tomllib
 from collections.abc import Iterable
 from itertools import tee
 from logging import DEBUG, StreamHandler, getLogger
-from typing import Dict, Union
+from typing import Dict
 
 import yaml  # type: ignore
 
@@ -43,12 +43,16 @@ def setup_logger():
 logger = setup_logger()
 
 
-class Config(dict):
-    def __init__(self):
+class BaseConfig(dict):
+    def __init__(self, setting: Dict):
         super().__init__()
         self.__dict__ = self
+        self.update(setting)
 
+    @staticmethod
     def read(self, path: str):
+        super().__init__()
+        self.__dict__ = self
         extention = os.path.splitext(path)[1]
         if extention in (".yaml", ".yml"):
             self.update(yaml.safe_load(open(path, "r")))
@@ -62,11 +66,6 @@ class Config(dict):
 
     def __str__(self):
         return pprint.pformat(self, width=40)
-
-    def __call__(self, obj: Union[Dict, None] = None):
-        if obj is not None:
-            self.update(obj)
-        return self
 
 
 class ProgressBar:

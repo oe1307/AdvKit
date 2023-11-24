@@ -4,6 +4,7 @@ import json
 import os
 import pprint
 import random
+import tomllib
 from collections.abc import Iterable
 from itertools import tee
 from logging import DEBUG, StreamHandler, getLogger
@@ -42,7 +43,7 @@ def setup_logger():
 logger = setup_logger()
 
 
-class ConfigParser(dict):
+class Config(dict):
     def __init__(self):
         super().__init__()
         self.__dict__ = self
@@ -54,8 +55,6 @@ class ConfigParser(dict):
         elif extention == ".json":
             self.update(json.load(open(path, "r")))
         elif extention == ".toml":
-            import tomllib
-
             self.update(tomllib.load(open(path, "rb")))
         else:
             raise NotImplementedError(f"Unsupported file type: {extention}")
@@ -68,9 +67,6 @@ class ConfigParser(dict):
         if obj is not None:
             self.update(obj)
         return self
-
-
-config_parser = ConfigParser()
 
 
 class ProgressBar:

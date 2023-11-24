@@ -1,8 +1,8 @@
-from pyadv import config_parser
+from pyadv import Config
 
 
 def test_load_json():
-    config = config_parser.read("tests/storage/config.json")
+    config = Config.read("tests/storage/config.json")
     assert list(config.keys()) == [
         "test1_int",
         "test1_float",
@@ -28,7 +28,7 @@ def test_load_json():
 
 
 def test_load_toml():
-    config = config_parser.read("tests/storage/config.toml")
+    config = Config.read("tests/storage/config.toml")
     assert list(config.keys()) == [
         "test2_int",
         "test2_float",
@@ -48,7 +48,7 @@ def test_load_toml():
 
 
 def test_load_yaml():
-    config = config_parser.read("tests/storage/config.yaml")
+    config = Config.read("tests/storage/config.yaml")
     assert list(config.keys()) == [
         "test3_int",
         "test3_float",

@@ -33,9 +33,9 @@ cmake --build .build
 #### Run with Python imprementation
 
 ```python
-from pyadv import config_parser, get_attacker, get_dataset, get_model, logger
+from pyadv import Config, get_attacker, get_dataset, get_model
 
-config = config_parser.read("fgsm.yaml")  # support for yaml, json, toml
+config = Config.read("fgsm.yaml")  # support for yaml, json, toml
 # or
 setting = {
     "attacker": "FGSM",
@@ -49,9 +49,8 @@ setting = {
     # --- parameter ---
     "criterion": "cw",
 }
-config = config_parser(setting)
+config = Config(setting)
 
-logger.setLevel("INFO")
 attacker = get_attacker(config)
 model = get_model(config)
 data, label = get_dataset(config)
@@ -64,7 +63,7 @@ attacker.attack(model, data, label)
 ```c++
 #include <advlib/advlib.hpp>
 
-auto config = advlib::config_parser.read("fgsm.yaml");  // support for yaml, json, toml
+auto config = advlib::Config.read("fgsm.yaml");  // support for yaml, json, toml
 // or
 auto setting = {
     {"attacker", "FGSM"},
@@ -78,9 +77,8 @@ auto setting = {
     // --- parameter ---
     {"criterion", "cw"}
 }
-auto config = advlib::config_parser(setting)
+auto config = advlib::Config(setting)
 
-advlib::logger.setLevel("INFO")
 auto attacker = advlib::get_attacker(config);
 auto model = advlib::get_model(config);
 auto [data, label] = advlib::get_dataset(config);

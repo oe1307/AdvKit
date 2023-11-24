@@ -2,9 +2,8 @@ test2_int = 2
 test2_float = 2.1
 test2_str = "test2_1"
 test2_list = [2.2, 2.3, 2.4]
-test2_dict.test2_1 = 2.5
-test2_dict.test2_2 = 2.6
+test2_dict.test2_2 = 2.5
+test2_dict.test2_3 = 2.6
 test2_bool = true
 test2_empty_list = []
-test2_empty_dict = {}
 # test2_conmment

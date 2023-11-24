@@ -10,7 +10,7 @@ from pyadv.utils import config_parser, logger, prange
 config = config_parser()
 
 
-class IterativeFGSM(Attacker):
+class IterativeFgsm(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
         self.check_hyperparameters()

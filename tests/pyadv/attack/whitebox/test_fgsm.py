@@ -5,7 +5,7 @@ from pyadv import config_parser, get_attacker, get_dataset, get_model, logger
 
 def test_fgsm():
     setting = {
-        "attacker": "FGSM",
+        "attacker": "Fgsm",
         "norm": "Linf",
         "epsilon": 0.015625,
         "dataset": "cifar10",

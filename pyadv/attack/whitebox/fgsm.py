@@ -10,7 +10,7 @@ from pyadv.utils import config_parser, logger, pbar
 config = config_parser()
 
 
-class FastGradientSignMethod(Attacker):
+class Fgsm(Attacker):
     def __init__(self):
         self.criterion = get_criterion()
         self.check_hyperparameters()
@@ -44,4 +44,4 @@ class FastGradientSignMethod(Attacker):
         return adex
 
     def check_hyperparameters(self):
-        logger.debug("Parameters: \n" + f" criterion: {config.criterion}\n")
+        logger.debug("Parameters: \n criterion: {config.criterion}\n")

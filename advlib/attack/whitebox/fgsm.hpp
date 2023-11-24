@@ -1,12 +1,16 @@
 #ifndef ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_
 #define ADVLIB_ATTACK_WHITEBOX_FGSM_HPP_
 
+#include <string>
+
 #include "../../base_attacker.hpp"
+#include "../../base_config.hpp"
 
 namespace advlib {
 
 class FgsmConfig : public Config {
-   private:
+   public:
+    std::string criterion;
     void update(functions::dict setting) { Config::update(setting); }
 };
 

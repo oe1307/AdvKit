@@ -3,11 +3,14 @@ from torch import Tensor
 
 from pyadv.attack.whitebox.core import get_projection
 from pyadv.base_attacker import Attacker
+from pyadv.base_config import Config
 from pyadv.criterion import get_criterion
 from pyadv.data import batch_process
-from pyadv.utils import config_parser, logger, pbar
+from pyadv.utils import logger, pbar
 
-config = config_parser()
+
+class FgsmConfig(Config):
+    criterion: str
 
 
 class Fgsm(Attacker):

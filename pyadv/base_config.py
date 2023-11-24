@@ -1,3 +1,5 @@
+from typing import Union
+
 from utils import ConfigParser
 
 
@@ -9,4 +11,4 @@ class Config(ConfigParser):
     model: str
     n_examples: int
     batch_size: int
-    device: str
+    device: Union[str, int]

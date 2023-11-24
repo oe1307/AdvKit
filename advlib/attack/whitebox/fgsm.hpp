@@ -5,9 +5,9 @@
 
 namespace advlib {
 
-class FgsmParameter : public Parameter {
+class FgsmConfig : public Config {
    private:
-    void update(dict setting) { Config::update(setting); }
+    void update(functions::dict setting) { Config::update(setting); }
 };
 
 class Fgsm : public Attacker {

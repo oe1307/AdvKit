@@ -43,7 +43,7 @@ def setup_logger():
 logger = setup_logger()
 
 
-class BaseConfig(dict):
+class ConfigParser(dict):
     def __init__(self, setting: Dict):
         super().__init__()
         self.__dict__ = self

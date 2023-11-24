@@ -21,7 +21,7 @@ inline void fix_seed(int seed = 0) {
 
 extern functions::Logger logger;
 
-class BaseConfig {
+class ConfigParser {
    public:
     virtual void update(functions::dict setting) = 0;
     void read(std::string path) {

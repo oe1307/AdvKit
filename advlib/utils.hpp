@@ -99,14 +99,14 @@ inline dict load_toml(std::string path) {
     return params;
 }
 
-class BaseConfig {
-public:
-    explicit BaseConfig(dict setting);
+class Config {
+   public:
+    virtual void update(dict setting);
 };
 
 class ConfigParser {
    public:
-    BaseConfig read(std::string path) {
+    Config read(std::string path) {
         dict setting;
         std::string extention;
 
@@ -120,11 +120,13 @@ class ConfigParser {
         } else {
             throw std::runtime_error("Unsupported file format: " + extention);
         }
-        return BaseConfig(setting);
+        this->config.update(setting);
+        return this->config;
     }
+    Config get() { return this->config; }
 
    private:
-    BaseConfig config;
+    Config config;
 };
 
 ConfigParser config_parser();

@@ -5,14 +5,13 @@
 
 namespace advlib {
 
-class FgsmParameter : public Parameter{
-   public:
-    explicit FgsmParameter(dict setting) : Parameter(setting) {}
+class FgsmParameter : public Parameter {
+   private:
+    void update(dict setting) { Config::update(setting); }
 };
 
 class Fgsm : public Attacker {
-   public:
-    explicit Fgsm(Config config) : Attacker(config) {}
+   private:
     void _attack() override;
 };
 

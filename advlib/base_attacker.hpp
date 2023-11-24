@@ -19,7 +19,8 @@ class Parameter : public Config {
     int batch_size;
     int device;
 
-    explicit Parameter(dict setting) {
+   private:
+    void update(dict setting) override {
         this->attacker = setting["attacker"];
         this->norm = setting["norm"];
         this->epsilon = stof(setting["epsilon"]);

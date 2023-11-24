@@ -20,6 +20,7 @@ class Parameter : public Config {
     int device;
 
    private:
+    Parameter get_param() { return *this; }
     void update(dict setting) override {
         this->attacker = setting["attacker"];
         this->norm = setting["norm"];

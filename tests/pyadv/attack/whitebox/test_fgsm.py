@@ -15,7 +15,6 @@ def test_fgsm():
         # --- parameter ---
         "criterion": "cw",
     }
-    config_parser().clear()
     config = config_parser(setting)
     if torch.backends.cudnn.is_available():
         config.device = "cuda"
@@ -25,8 +24,8 @@ def test_fgsm():
         raise RuntimeError("No GPU found")
 
     logger.setLevel("DEBUG")
-    attacker = get_attacker()
-    model = get_model()
-    data, label = get_dataset()
+    attacker = get_attacker(config)
+    model = get_model(config)
+    data, label = get_dataset(config)
 
     attacker.attack(model, data, label)

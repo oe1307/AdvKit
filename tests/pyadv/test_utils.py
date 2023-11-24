@@ -2,7 +2,6 @@ from pyadv import config_parser
 
 
 def test_load_json():
-    config_parser().clear()
     config = config_parser.read("tests/storage/config.json")
     assert list(config.keys()) == [
         "test1_int",
@@ -29,7 +28,6 @@ def test_load_json():
 
 
 def test_load_toml():
-    config_parser().clear()
     config = config_parser.read("tests/storage/config.toml")
     assert list(config.keys()) == [
         "test2_int",
@@ -50,7 +48,6 @@ def test_load_toml():
 
 
 def test_load_yaml():
-    config_parser().clear()
     config = config_parser.read("tests/storage/config.yaml")
     assert list(config.keys()) == [
         "test3_int",

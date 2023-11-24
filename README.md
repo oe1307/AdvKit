@@ -52,9 +52,9 @@ setting = {
 config = config_parser(setting)
 
 logger.setLevel("INFO")
-attacker = get_attacker()
-model = get_model()
-data, label = get_dataset()
+attacker = get_attacker(config)
+model = get_model(config)
+data, label = get_dataset(config)
 
 attacker.attack(model, data, label)
 ```
@@ -78,12 +78,12 @@ auto setting = {
     // --- parameter ---
     {"criterion", "cw"}
 }
-auto config = config_parser(setting)
+auto config = advlib::config_parser(setting)
 
 advlib::logger.setLevel("INFO")
-auto attacker = advlib::get_attacker();
-auto model = advlib::get_model();
-auto [data, label] = advlib::get_dataset();
+auto attacker = advlib::get_attacker(config);
+auto model = advlib::get_model(config);
+auto [data, label] = advlib::get_dataset(config);
 
 attacker.attack(model, data, label);
 ```

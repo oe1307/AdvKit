@@ -18,17 +18,14 @@ inline void fix_seed(int seed) {
 
 class Logger {
    public:
-    enum Level {
-        CRITICAL = 50,
-        FATAL = CRITICAL,
-        ERROR = 40,
-        WARNING = 30,
-        WARN = WARNING,
-        INFO = 20,
-        DEBUG = 10,
-        NOTSET = 0
-    };
-    void setLevel(Level level) { this->level = level; }
+    int CRITICAL = 50;
+    int FATAL = CRITICAL;
+    int ERROR = 40;
+    int WARNING = 30;
+    int WARN = WARNING;
+    int INFO = 20;
+    int DEBUG = 10;
+    int NOTSET = 0;
     void setLevel(int level) { this->level = level; }
     void critical(std::string msg) {
         if (this->level >= CRITICAL) {
@@ -99,14 +96,10 @@ inline dict load_toml(std::string path) {
     return params;
 }
 
-class Config {
+class BaseConfig {
    public:
     virtual void update(dict setting);
-};
-
-class ConfigParser {
-   public:
-    Config read(std::string path) {
+    void read(std::string path) {
         dict setting;
         std::string extention;
 
@@ -120,16 +113,11 @@ class ConfigParser {
         } else {
             throw std::runtime_error("Unsupported file format: " + extention);
         }
-        this->config.update(setting);
-        return this->config;
+        this->update(setting);
     }
-    Config get() { return this->config; }
-
-   private:
-    Config config;
 };
 
-extern ConfigParser config_parser;
+extern Config config_parser;
 
 class ProgressBar {
    public:

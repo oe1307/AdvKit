@@ -44,7 +44,4 @@ class FastGradientSignMethod(Attacker):
         return adex
 
     def check_hyperparameters(self):
-        logger.debug(
-            "Parameters: \n"
-            + f" criterion: {config.criterion}\n"
-        )
+        logger.debug("Parameters: \n" + f" criterion: {config.criterion}\n")

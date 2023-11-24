@@ -10,13 +10,14 @@
 namespace advlib {
 
 inline Attacker* get_attacker() {
+    config_parser.get();
+    Parameter config;
     // Parameter config = config_parser().get();
-    // if (config.attacker == "Fgsm") {
-    //     return new Fgsm();
-    // } else {
-    //     throw std::invalid_argument("Invalid attacker: " + config.attacker);
-    // }
-    return new Fgsm();
+    if (config.attacker == "Fgsm") {
+        return new Fgsm();
+    } else {
+        throw std::invalid_argument("Invalid attacker: " + config.attacker);
+    }
 }
 
 }  // namespace advlib

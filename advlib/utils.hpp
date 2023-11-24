@@ -60,7 +60,7 @@ class Logger {
     int level;
 };
 
-Logger logger();
+extern Logger logger;
 
 inline dict load_yaml(std::string path) {
     dict params;
@@ -129,7 +129,7 @@ class ConfigParser {
     Config config;
 };
 
-ConfigParser config_parser();
+extern ConfigParser config_parser;
 
 class ProgressBar {
    public:

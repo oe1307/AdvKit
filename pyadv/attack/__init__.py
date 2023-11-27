@@ -12,4 +12,5 @@ attack_methods = {
 
 
 def get_attacker(config: Config):
-    return attack_methods[config.attacker](config)
+    attacker = attack_methods[config.attacker]
+    return attacker(config)

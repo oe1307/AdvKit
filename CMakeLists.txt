@@ -12,6 +12,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 include(advlib/cmake/libtorch.cmake)
+target_include_directories()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
   add_compile_options(-O2 -Wall -Wextra)

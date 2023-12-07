@@ -7,12 +7,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(AdvKit)
 
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
+set(AdvLib ${CMAKE_SOURCE_DIR}/advlib/include)
 include(advlib/cmake/libtorch.cmake)
-target_include_directories()
+
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
   add_compile_options(-O2 -Wall -Wextra)

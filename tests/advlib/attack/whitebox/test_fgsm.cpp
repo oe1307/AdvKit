@@ -1,4 +1,4 @@
-#include "../../../../advlib/advlib.hpp"
+#include <advlib.h>
 
 int main() {
     // auto config = advlib::config_parser();

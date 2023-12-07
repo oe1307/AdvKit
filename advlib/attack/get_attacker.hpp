@@ -10,7 +10,7 @@
 namespace advlib {
 
 inline Attacker* get_attacker() {
-    Parameter config = config_parser.get_param();
+    Config config;
     if (config.attacker == "Fgsm") {
         return new Fgsm();
     } else {

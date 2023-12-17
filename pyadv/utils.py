@@ -40,7 +40,7 @@ def setup_logger():
     return logger
 
 
-logger = setup_logger()
+logger = setup_logger() # default logger
 
 
 class ConfigParser(dict):

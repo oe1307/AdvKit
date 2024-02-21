@@ -1,0 +1,43 @@
+[build-system]
+requires = ["wheel", "setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyadv"
+description = "cpp/python implementation for adversarial attack"
+readme = "README.md"
+license = { file = "LICENSE" }
+dynamic = ["version"]
+keywords = ["adversarial attack"]
+requires-python = ">=3.11"
+dependencies = [
+  "torch",
+  "torchvision",
+  "robustbench @ git+https://github.com/RobustBench/robustbench.git",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "isort",
+  "pyproject-flake8",
+  "mypy",
+  "pytest",
+]
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+
+[tool.flake8]
+max-line-length = 88
+ignore = "E203,E402,W503,"
+
+[tool.isort]
+profile = "black"

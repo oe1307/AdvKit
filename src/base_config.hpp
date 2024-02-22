@@ -10,7 +10,6 @@ namespace advlib {
 class Config {
    public:
     dict setting;
-
     std::string attacker;
     std::string norm;
     float epsilon;
@@ -20,7 +19,11 @@ class Config {
     int batch_size;
     std::string device;
 
+    void check_keys(dict setting);
+    std::string value();
+
     explicit Config(dict setting) {
+        check_keys(setting);
         this->setting = setting;
         this->attacker = setting["attacker"];
         this->norm = setting["norm"];
@@ -31,8 +34,6 @@ class Config {
         this->batch_size = stoi(setting["batch_size"]);
         this->device = stoi(setting["device"]);
     }
-
-    std::string value();
 };
 
 }  // namespace advlib

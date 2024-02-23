@@ -3,11 +3,13 @@
 
 #include <torch/torch.h>
 
+#include <utility>
+
 #include "./base_config.hpp"
 
 namespace advlib {
 
-torch::Tensor get_dataset(Config config);
+std::pair<torch::Tensor, torch::Tensor> get_dataset(Config config);
 
 }  // namespace advlib
 

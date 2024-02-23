@@ -8,6 +8,7 @@ include(${ADVLIB_ROOT_DIR}/cmake/FetchTorch.cmake)
 
 add_library(advlib SHARED ${ADVLIB_ROOT_DIR}/src/utils.cpp
                           ${ADVLIB_ROOT_DIR}/src/model.cpp
+                          ${ADVLIB_ROOT_DIR}/src/data.cpp
                           ${ADVLIB_ROOT_DIR}/src/base_config.cpp)
 target_link_libraries(advlib ${TORCH_LIBRARIES})
 

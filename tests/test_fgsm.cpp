@@ -14,6 +14,7 @@ int main() {
         auto config = advlib::Config(setting);
         std::cout << config.value() << std::endl;
         auto model = advlib::get_model(config);
+        auto [data, label] = advlib::get_dataset(config);
         return 0;
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;

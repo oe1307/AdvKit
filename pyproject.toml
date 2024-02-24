@@ -10,20 +10,7 @@ license = { file = "LICENSE" }
 dynamic = ["version"]
 keywords = ["adversarial attack"]
 requires-python = ">=3.11"
-dependencies = [
-  "torch",
-  "torchvision",
-  "robustbench @ git+https://github.com/RobustBench/robustbench.git",
-]
-
-[project.optional-dependencies]
-dev = [
-  "black",
-  "isort",
-  "pyproject-flake8",
-  "mypy",
-  "pytest",
-]
+dependencies = ["torch"]
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]

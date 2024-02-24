@@ -32,7 +32,7 @@ class Config {
         this->n_examples = stoi(setting["n_examples"]);
         this->model = setting["model"];
         this->batch_size = stoi(setting["batch_size"]);
-        this->device = stoi(setting["device"]);
+        this->device = setting["device"];
     }
 };
 

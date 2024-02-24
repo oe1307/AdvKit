@@ -5,4 +5,4 @@ dataset: cifar10
 n_examples: 100
 model: Carmon2019Unlabeled
 batch_size: 100
-device: 0
+device: mps

@@ -1,2 +1,10 @@
-set(RESNET18_URL "https://download.pytorch.org/models/resnet18-f37072fd.pth")
-file(DOWNLOAD ${RESNET18_URL} ${CMAKE_SOURCE_DIR}/resnet18.pth)
+set(TEST_MODEL ${CMAKE_SOURCE_DIR}/tests/example/resnet18.pth)
+
+if(NOT EXISTS ${TEST_MODEL})
+  message(STATUS "Downloading TestModel")
+  set(RESNET18_URL "https://download.pytorch.org/models/resnet18-f37072fd.pth")
+  file(DOWNLOAD ${RESNET18_URL} ${TEST_MODEL})
+  message(STATUS "Downloading TestModel - done")
+else()
+  message(STATUS "Found TestModel")
+endif()

@@ -10,7 +10,7 @@ license = { file = "LICENSE" }
 dynamic = ["version"]
 keywords = ["adversarial attack"]
 requires-python = ">=3.11"
-dependencies = ["torch"]
+dependencies = ["torchvision"]
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]

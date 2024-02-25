@@ -6,10 +6,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ADVLIB_ROOT_DIR}/lib)
 # include(${AdvLib_DIR}/../cmake/FetchOpenCV.cmake)
 include(${ADVLIB_ROOT_DIR}/cmake/FetchTorch.cmake)
 
-add_library(advlib SHARED ${ADVLIB_ROOT_DIR}/src/utils.cpp
-                          ${ADVLIB_ROOT_DIR}/src/model.cpp
-                          ${ADVLIB_ROOT_DIR}/src/data.cpp
-                          ${ADVLIB_ROOT_DIR}/src/base_config.cpp)
+add_library(
+  advlib SHARED
+  ${ADVLIB_ROOT_DIR}/src/base_config.cpp ${ADVLIB_ROOT_DIR}/src/data.cpp
+  ${ADVLIB_ROOT_DIR}/src/model.cpp ${ADVLIB_ROOT_DIR}/src/utils.cpp)
 target_link_libraries(advlib ${TORCH_LIBRARIES})
 
 include_directories(${ADVLIB_INCLUDE_DIR})

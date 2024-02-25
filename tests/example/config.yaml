@@ -1,8 +1,10 @@
 attacker: Fgsm
+
 norm: Linf
 epsilon: 0.01568627450980392
-dataset: cifar10
 n_examples: 100
-model: Carmon2019Unlabeled
 batch_size: 100
+
+dataset: cifar10
+model: tests/example/test_model_jit.pth
 device: mps

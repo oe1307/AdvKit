@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import math
+import os
+from collections import OrderedDict
 
 import requests  # type: ignore
 import torch
@@ -167,12 +169,25 @@ def download_gdrive(gdrive_id: str, fname_save: str) -> None:
     session.close()
 
 
+def rm_substr_from_state_dict(state_dict, substr: str):  # type: ignore
+    new_state_dict = OrderedDict()
+    for key in state_dict.keys():
+        if substr in key:  # to delete prefix 'module.' if it exists
+            new_key = key[len(substr) :]
+            new_state_dict[new_key] = state_dict[key]
+        else:
+            new_state_dict[key] = state_dict[key]
+    return new_state_dict
+
+
 # Carmon2019Unlabeled
 gdrive_id = "15tUx-gkZMYx7BfEOw1GY5OKC-jECIsPQ"
-save_file = "tests/example/test_model.pt"
+path = "tests/example/test_model.pt"
 
-download_gdrive(gdrive_id, save_file)
+if not os.path.exists(path):
+    print(f"Download started: {path=} ({gdrive_id=})")
+    download_gdrive(gdrive_id, path)
 model = WideResNet(depth=28, widen_factor=10, sub_block1=True)
-model_weight = torch.load(save_file)
-model = model.load_state_dict(model_weight)
-breakpoint()
+checkpoint = torch.load(path, map_location="cpu")
+state_dict = rm_substr_from_state_dict(checkpoint["state_dict"], "module.")
+model = model.load_state_dict(state_dict)

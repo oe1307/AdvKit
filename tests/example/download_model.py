@@ -111,22 +111,16 @@ class WideResNet(nn.Module):  # type: ignore
         assert (depth - 4) % 6 == 0
         n = (depth - 4) / 6
         block = BasicBlock
-        # 1st conv before any network block
         self.conv1 = nn.Conv2d(
             3, nChannels[0], kernel_size=3, stride=1, padding=1, bias=False
         )
-        # 1st block
         self.block1 = NetworkBlock(n, nChannels[0], nChannels[1], block, 1, dropRate)
         if sub_block1:
-            # 1st sub-block
             self.sub_block1 = NetworkBlock(
                 n, nChannels[0], nChannels[1], block, 1, dropRate
             )
-        # 2nd block
         self.block2 = NetworkBlock(n, nChannels[1], nChannels[2], block, 2, dropRate)
-        # 3rd block
         self.block3 = NetworkBlock(n, nChannels[2], nChannels[3], block, 2, dropRate)
-        # global average pooling and classifier
         self.bn1 = nn.BatchNorm2d(nChannels[3])
         self.relu = nn.ReLU(inplace=True)
         self.fc = nn.Linear(nChannels[3], num_classes, bias=bias_last)
@@ -172,7 +166,7 @@ def download_gdrive(gdrive_id: str, fname_save: str) -> None:
 def rm_substr_from_state_dict(state_dict, substr: str):  # type: ignore
     new_state_dict = OrderedDict()
     for key in state_dict.keys():
-        if substr in key:  # to delete prefix 'module.' if it exists
+        if substr in key:
             new_key = key[len(substr) :]
             new_state_dict[new_key] = state_dict[key]
         else:

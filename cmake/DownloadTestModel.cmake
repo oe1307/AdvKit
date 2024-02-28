@@ -1,3 +1,8 @@
+if(EXISTS ${ADVLIB_ROOT_DIR}/tests/example/test_model.pt)
+  message(STATUS "Detected TestModel")
+  return()
+endif()
+
 find_package(Python3 REQUIRED)
 
 if(NOT Python3_FOUND)

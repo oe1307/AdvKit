@@ -178,7 +178,6 @@ gdrive_id = "15tUx-gkZMYx7BfEOw1GY5OKC-jECIsPQ"
 path = "tests/example/test_model.pt"
 
 if not os.path.exists(path):
-    print(f"Download started: {path=} ({gdrive_id=})")
     download_gdrive(gdrive_id, path)
 model = WideResNet(depth=28, widen_factor=10, sub_block1=True)
 checkpoint = torch.load(path, map_location="cpu")

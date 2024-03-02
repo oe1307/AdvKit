@@ -189,8 +189,5 @@ model.load_state_dict(state_dict, strict=True)
 model = model.eval()
 
 tmp_input = torch.randn(1, 3, 32, 32)
-try:
-    model_script = torch.jit.script(model)
-except Exception:
-    model_script = torch.jit.trace(model, tmp_input)
+model_script = torch.jit.trace(model, tmp_input)
 model_script.save("test_model_jit.pt")

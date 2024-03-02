@@ -95,8 +95,6 @@ class NetworkBlock(nn.Module):  # type: ignore
 
 
 class WideResNet(nn.Module):  # type: ignore
-    """Based on code from https://github.com/yaodongyu/TRADES"""
-
     def __init__(
         self,
         depth: int = 28,
@@ -163,7 +161,9 @@ def download_gdrive(gdrive_id: str, fname_save: str) -> None:
     session.close()
 
 
-def rm_substr_from_state_dict(state_dict, substr: str):  # type: ignore
+def rm_substr_from_state_dict(
+    state_dict: OrderedDict[str, Tensor], substr: str
+) -> OrderedDict[str, Tensor]:
     new_state_dict = OrderedDict()
     for key in state_dict.keys():
         if substr in key:
@@ -184,4 +184,13 @@ if not os.path.exists(path):
 model = WideResNet(depth=28, widen_factor=10, sub_block1=True)
 checkpoint = torch.load(path, map_location="cpu")
 state_dict = rm_substr_from_state_dict(checkpoint["state_dict"], "module.")
-model = model.load_state_dict(state_dict)
+state_dict = rm_substr_from_state_dict(state_dict, "model.")
+model.load_state_dict(state_dict, strict=True)
+model = model.eval()
+
+tmp_input = torch.randn(1, 3, 32, 32)
+try:
+    model_script = torch.jit.script(model)
+except Exception:
+    model_script = torch.jit.trace(model, tmp_input)
+model_script.save("test_model_jit.pt")

@@ -1,4 +1,4 @@
-if(EXISTS ${ADVLIB_ROOT_DIR}/tests/example/test_model.pt)
+if(EXISTS ${ADVLIB_ROOT_DIR}/tests/example/test_model_jit.pth)
   message(STATUS "Detected TestModel")
   return()
 endif()

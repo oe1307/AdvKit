@@ -10,6 +10,7 @@
 namespace advlib {
 
 std::pair<torch::Tensor, torch::Tensor> get_dataset(Config config);
+std::pair<torch::Tensor, torch::Tensor> load_cifar10(Config config);
 
 }  // namespace advlib
 

@@ -7,4 +7,4 @@ batch_size: 100
 
 dataset: cifar10
 model: tests/example/test_model_jit.pth
-device: mps
+device: cpu

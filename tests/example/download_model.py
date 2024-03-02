@@ -50,8 +50,7 @@ class BasicBlock(nn.Module):  # type: ignore
         if self.droprate > 0:
             out = F.dropout(out, p=self.droprate, training=self.training)
         out = self.conv2(out)
-        output = x if self.equalInOut else self.convShortcut(x), out  # type: ignore
-        return torch.add(output)
+        return torch.add(x if self.equalInOut else self.convShortcut(x), out)
 
 
 class NetworkBlock(nn.Module):  # type: ignore
@@ -131,7 +130,7 @@ class WideResNet(nn.Module):  # type: ignore
             elif isinstance(m, nn.BatchNorm2d):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
-            elif isinstance(m, nn.Linear) and m.bias is not None:
+            elif isinstance(m, nn.Linear) and not m.bias is None:
                 m.bias.data.zero_()
 
     def forward(self, x: Tensor) -> Tensor:

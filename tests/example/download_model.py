@@ -189,4 +189,4 @@ model = model.eval()
 
 tmp_input = torch.randn(1, 3, 32, 32)
 model_script = torch.jit.trace(model, tmp_input)
-model_script.save("test_model_jit.pt")
+model_script.save("tests/example/test_model_jit.pth")

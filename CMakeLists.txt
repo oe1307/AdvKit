@@ -11,6 +11,11 @@ add_compile_options(-O2 -Wall -Wextra)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR})
 find_package(AdvLib REQUIRED)
+
+# download test examples
 include(${CMAKE_SOURCE_DIR}/cmake/DownloadTestModel.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/DownloadCifar10.cmake)
+
+# compile test code
 add_executable(test_fgsm.exe ${CMAKE_SOURCE_DIR}/tests/test_fgsm.cpp)
 target_link_libraries(test_fgsm.exe advlib)
